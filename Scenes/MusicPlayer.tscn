@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dghb8m1gk21hr"]
+
+[ext_resource type="AudioStream" uid="uid://62wt3b3umcb8" path="res://Assets/Audio/GameLevelMusic.wav" id="1_tbwwi"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_tbwwi")
+volume_db = -12.0
+autoplay = true
+bus = &"Music"
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
