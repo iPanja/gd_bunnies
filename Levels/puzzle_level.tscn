@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://vpvfvn6r750h"]
+
+[node name="PuzzleLevel" type="Node2D"]
