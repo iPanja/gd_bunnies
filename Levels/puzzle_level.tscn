@@ -42,11 +42,14 @@ texture_region_size = Vector2i(72, 72)
 0:0/next_alternative_id = 5
 0:0/0 = 0
 0:0/1 = 1
-0:0/1/flip_h = true
+0:0/1/flip_v = true
+0:0/1/transpose = true
 0:0/2 = 2
-0:0/2/transpose = true
+0:0/2/flip_h = true
+0:0/2/flip_v = true
 0:0/3 = 3
-0:0/3/flip_v = true
+0:0/3/flip_h = true
+0:0/3/transpose = true
 0:0/4 = 4
 
 [sub_resource type="TileSet" id="TileSet_jaaco"]

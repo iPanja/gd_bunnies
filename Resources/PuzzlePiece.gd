@@ -19,3 +19,6 @@ func get_augmented_inouts() -> Array:
 func rotate() -> int:
 	rotation = (rotation + 1) % 4
 	return rotation
+
+func get_alt_id() -> int:
+	return rotation

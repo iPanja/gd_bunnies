@@ -22,7 +22,7 @@ func load_pieces():
 func _load_piece(piece_id: int) -> PuzzlePiece:
 	match piece_id:
 		2:
-			return load("res://Resources/Pieces/CurvedTube.tres")
-		3:
 			return load("res://Resources/Pieces/StraightTube.tres")
+		3:
+			return load("res://Resources/Pieces/CurvedTube.tres")
 	return null
