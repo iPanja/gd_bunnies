@@ -1,6 +1,51 @@
-[gd_scene format=3 uid="uid://vpvfvn6r750h"]
+[gd_scene load_steps=6 format=3 uid="uid://vpvfvn6r750h"]
 
-[node name="PuzzleLevel" type="Node2D"]
+[ext_resource type="Script" path="res://Scripts/PuzzleManager.gd" id="1_5uxo7"]
+[ext_resource type="Texture2D" uid="uid://cjhub0kjji6ru" path="res://Assets/Biomes/grass.png" id="2_krio6"]
+[ext_resource type="Texture2D" uid="uid://bpf1r51yjdqpk" path="res://Assets/PuzzlePieces/HiddenTile.png" id="3_fgnal"]
 
-[node name="TileMap" type="TileMap" parent="."]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_by0hg"]
+texture = ExtResource("3_fgnal")
+texture_region_size = Vector2i(72, 72)
+0:0/next_alternative_id = 6
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/transpose = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/transpose = true
+0:0/4 = 4
+
+[sub_resource type="TileSet" id="TileSet_jaaco"]
+tile_size = Vector2i(72, 72)
+sources/0 = SubResource("TileSetAtlasSource_by0hg")
+
+[node name="PuzzleLevel" type="Node2D" node_paths=PackedStringArray("puzzle_container", "tile_map")]
+script = ExtResource("1_5uxo7")
+puzzle_container = NodePath("PuzzleBackdrop")
+tile_map = NodePath("PuzzleBackdrop/TileMap")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(576, 326)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_krio6")
+
+[node name="PuzzleBackdrop" type="ColorRect" parent="."]
+offset_right = 653.0
+offset_bottom = 371.0
+color = Color(1, 1, 1, 0.752941)
+
+[node name="TileMap" type="TileMap" parent="PuzzleBackdrop"]
+tile_set = SubResource("TileSet_jaaco")
+cell_quadrant_size = 72
 format = 2
+layer_0/name = "Pieces"
+layer_1/name = "Hidden"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()
