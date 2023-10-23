@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PuzzlePiece" load_steps=2 format=3 uid="uid://2sxhrlls75st"]
+
+[ext_resource type="Script" path="res://Resources/PuzzlePiece.gd" id="1_nj8nl"]
+
+[resource]
+script = ExtResource("1_nj8nl")
+piece_id = 2
+inouts = [3, 1]
+rotation = 0

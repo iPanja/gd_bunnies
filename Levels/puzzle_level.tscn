@@ -1,8 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://vpvfvn6r750h"]
+[gd_scene load_steps=14 format=3 uid="uid://vpvfvn6r750h"]
 
 [ext_resource type="Script" path="res://Scripts/PuzzleManager.gd" id="1_5uxo7"]
 [ext_resource type="Texture2D" uid="uid://cjhub0kjji6ru" path="res://Assets/Biomes/grass.png" id="2_krio6"]
+[ext_resource type="Resource" uid="uid://dr3tkgvi017b2" path="res://Resources/Puzzles/B1L1.tres" id="2_vicuy"]
 [ext_resource type="Texture2D" uid="uid://bpf1r51yjdqpk" path="res://Assets/PuzzlePieces/HiddenTile.png" id="3_fgnal"]
+[ext_resource type="Script" path="res://Scripts/PlayerUI.gd" id="4_slq01"]
+[ext_resource type="Texture2D" uid="uid://blhr8dbip3kti" path="res://Assets/PuzzlePieces/StraightTube.png" id="5_smfct"]
+[ext_resource type="Texture2D" uid="uid://3mkn4feqvuc2" path="res://Assets/PuzzlePieces/CurvedTube.png" id="6_dgtgh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_by0hg"]
 texture = ExtResource("3_fgnal")
@@ -18,14 +22,50 @@ texture_region_size = Vector2i(72, 72)
 0:0/3/transpose = true
 0:0/4 = 4
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_65tsh"]
+texture = ExtResource("5_smfct")
+texture_region_size = Vector2i(72, 72)
+0:0/next_alternative_id = 5
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/transpose = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/transpose = true
+0:0/4 = 4
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vsk3l"]
+texture = ExtResource("6_dgtgh")
+texture_region_size = Vector2i(72, 72)
+0:0/next_alternative_id = 5
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/transpose = true
+0:0/3 = 3
+0:0/3/flip_v = true
+0:0/4 = 4
+
 [sub_resource type="TileSet" id="TileSet_jaaco"]
 tile_size = Vector2i(72, 72)
 sources/0 = SubResource("TileSetAtlasSource_by0hg")
+sources/2 = SubResource("TileSetAtlasSource_65tsh")
+sources/3 = SubResource("TileSetAtlasSource_vsk3l")
+
+[sub_resource type="FontVariation" id="FontVariation_easim"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ffbel"]
+font = SubResource("FontVariation_easim")
+font_color = Color(0, 0, 0, 1)
 
 [node name="PuzzleLevel" type="Node2D" node_paths=PackedStringArray("puzzle_container", "tile_map")]
 script = ExtResource("1_5uxo7")
 puzzle_container = NodePath("PuzzleBackdrop")
 tile_map = NodePath("PuzzleBackdrop/TileMap")
+puzzle_level = ExtResource("2_vicuy")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(576, 326)
@@ -49,3 +89,37 @@ layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array()
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerUI" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("carrot_label")]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+script = ExtResource("4_slq01")
+carrot_label = NodePath("ColorRect/CarrotLabel")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/PlayerUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -60.0
+offset_right = 100.0
+grow_vertical = 0
+color = Color(1, 1, 1, 0.666667)
+
+[node name="CarrotLabel" type="Label" parent="CanvasLayer/PlayerUI/ColorRect"]
+layout_mode = 0
+offset_left = 10.0
+offset_right = 100.0
+offset_bottom = 60.0
+text = "x Carrots"
+label_settings = SubResource("LabelSettings_ffbel")
+vertical_alignment = 1
