@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://3mkn4feqvuc2"
-path="res://.godot/imported/CurvedTube.png-f7dc669dd6e32eee7912304258c3d481.ctex"
+path="res://.godot/imported/CurvedTube.png-a527b3e98b190334c991cbb4e59e784c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/PuzzlePieces/CurvedTube.png"
-dest_files=["res://.godot/imported/CurvedTube.png-f7dc669dd6e32eee7912304258c3d481.ctex"]
+source_file="res://Assets/Pipes/CurvedTube.png"
+dest_files=["res://.godot/imported/CurvedTube.png-a527b3e98b190334c991cbb4e59e784c.ctex"]
 
 [params]
 

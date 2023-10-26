@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://wlui8r1qvj"]
+
+[ext_resource type="Texture2D" uid="uid://brehqvp4nlk11" path="res://Assets/Biomes/Grass/TileBackground.png" id="1_k17up"]
+[ext_resource type="Script" path="res://Scripts/Slot.gd" id="1_myrbd"]
+[ext_resource type="PackedScene" uid="uid://d00memm8g1806" path="res://Scenes/Piece.tscn" id="2_4ujtp"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_73i32"]
+texture = ExtResource("1_k17up")
+expand_margin_top = 18.0
+expand_margin_bottom = 18.0
+
+[node name="Slot" type="Control"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 72.0
+offset_bottom = 72.0
+script = ExtResource("1_myrbd")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 72.0
+offset_bottom = 72.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_73i32")
+
+[node name="Node2D" parent="Panel" instance=ExtResource("2_4ujtp")]
+
+[connection signal="piece_dropped" from="Panel/Node2D" to="." method="_on_node_2d_piece_dropped"]

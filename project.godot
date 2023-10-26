@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Testing"
-run/main_scene="res://Levels/Main.tscn"
+run/main_scene="res://Levels/puzzle_level.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
 

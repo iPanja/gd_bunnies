@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PipeData" load_steps=3 format=3 uid="uid://c5k34do88r6pn"]
+
+[ext_resource type="Script" path="res://Resources/Pipes/PipeData.gd" id="1_3hsye"]
+[ext_resource type="Texture2D" uid="uid://blhr8dbip3kti" path="res://Assets/Pipes/StraightTube.png" id="2_h8urg"]
+
+[resource]
+script = ExtResource("1_3hsye")
+type = 0
+texture = ExtResource("2_h8urg")

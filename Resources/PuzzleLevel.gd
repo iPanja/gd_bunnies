@@ -19,7 +19,7 @@ func load_pieces():
 			row.append(piece)
 		pieces.append(row)
 	
-func _load_piece(piece_id: int) -> PuzzlePiece:
+func _load_piece(piece_id: int) -> Resource:
 	match piece_id:
 		2:
 			return load("res://Resources/Pieces/StraightTube.tres")

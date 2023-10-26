@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blhr8dbip3kti"
-path="res://.godot/imported/StraightTube.png-c7913c9ae498680781fffcc7c461f460.ctex"
+uid="uid://dhisnshvb7dre"
+path="res://.godot/imported/StartTube.png-4a7ab8ada00cf03cb09b7a63116d3bb5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/PuzzlePieces/StraightTube.png"
-dest_files=["res://.godot/imported/StraightTube.png-c7913c9ae498680781fffcc7c461f460.ctex"]
+source_file="res://Assets/Pipes/StartTube.png"
+dest_files=["res://.godot/imported/StartTube.png-4a7ab8ada00cf03cb09b7a63116d3bb5.ctex"]
 
 [params]
 

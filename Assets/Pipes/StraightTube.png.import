@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpf1r51yjdqpk"
-path="res://.godot/imported/HiddenTile.png-9b009344ae1f124ead3409ac34207580.ctex"
+uid="uid://blhr8dbip3kti"
+path="res://.godot/imported/StraightTube.png-1821753ec7ea4880c5619f59067edb43.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/PuzzlePieces/HiddenTile.png"
-dest_files=["res://.godot/imported/HiddenTile.png-9b009344ae1f124ead3409ac34207580.ctex"]
+source_file="res://Assets/Pipes/StraightTube.png"
+dest_files=["res://.godot/imported/StraightTube.png-1821753ec7ea4880c5619f59067edb43.ctex"]
 
 [params]
 
