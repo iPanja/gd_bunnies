@@ -38,10 +38,13 @@ enum layers{
 signal redraw
 signal update_ui(remaining_sec: int)
 
+# Misc
+var anim_stack = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	puzzle_container.set_position(Vector2(375,125))
-	puzzle_container.set_size(Vector2(piece_size*cols + 2*padding, piece_size*rows + 2*padding))
+	puzzle_container.set_size(Vector2(piece_size*cols + 2.6*padding, piece_size*rows + 2.5*padding))
 	
 	grid_container.columns = cols
 	grid_container.set_size(Vector2(piece_size*cols, piece_size*rows))
@@ -93,6 +96,7 @@ func populate_board(slot_datas: Array[SlotData]) -> void:
 		grid_container.add_child(slot)
 		#slot.get_node("Panel/Node2D").connect("piece_dropped", _on_puzzle_piece_dropped)
 		slot.connect("on_pipe_dropped", _on_puzzle_piece_dropped)
+		slot.connect("on_swap_animation_finish", on_swap_animation_finish)
 		
 		if slot_data: # This should always be true -> no empty slots will exist on the board
 			slot.set_slot_data(slot_data, index)
@@ -115,9 +119,19 @@ func _on_puzzle_piece_dropped(pipe_node: Node2D, slot_data: SlotData, index: int
 			var source: SlotData = slot_data.duplicate()
 			var target: SlotData = board[target_index].duplicate()
 			
-			board[source_index] = target
-			board[target_index] = source
-			self.emit_signal("redraw")
+			#board[source_index] = target
+			#board[target_index] = source
+			#self.emit_signal("redraw")
+			
+			# Animation
+			var source_node = grid_container.get_child(target_index)
+			var dest_node = grid_container.get_child(source_index)
+			source_node.play_swap_animation(dest_node.global_position)
+			anim_stack.append([source_index, source, target_index, target])
+			
+			# Snap piece that was moved, temporarily (until redraw after animation finishes)
+			dest_node.set_pipe_global_position(source_node.global_position)
+			
 			return
 	# Move piece back
 	pipe_node.call("reset_to_initial_pos")
@@ -136,3 +150,10 @@ func _on_timer_timeout():
 	emit_signal("update_ui", remaining_sec)
 	if remaining_sec <= 0: # timer == 0 => game over
 		pass
+
+func on_swap_animation_finish():
+	var data = anim_stack.pop_front()
+	if data.size() > 3:
+		board[data[0]] = data[3]
+		board[data[2]] = data[1]
+		self.emit_signal("redraw")

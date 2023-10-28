@@ -1,0 +1,98 @@
+[gd_scene load_steps=8 format=3 uid="uid://bm7qmt3nh6tux"]
+
+[ext_resource type="Script" path="res://Scripts/PuzzleManager.gd" id="1_5uxo7"]
+[ext_resource type="Resource" uid="uid://pqwmerkx2ans" path="res://Resources/Biomes/Grass.tres" id="2_f23e7"]
+[ext_resource type="Texture2D" uid="uid://cjhub0kjji6ru" path="res://Assets/Biomes/Grass/Background.png" id="3_qlxtp"]
+[ext_resource type="PackedScene" uid="uid://wlui8r1qvj" path="res://Scenes/Slot.tscn" id="4_urrgc"]
+[ext_resource type="Script" path="res://Scripts/UI/PlayerUI.gd" id="5_wjbot"]
+
+[sub_resource type="FontVariation" id="FontVariation_easim"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ffbel"]
+font = SubResource("FontVariation_easim")
+font_color = Color(0, 0, 0, 1)
+
+[node name="PuzzleLevel" type="Node2D" node_paths=PackedStringArray("puzzle_container")]
+script = ExtResource("1_5uxo7")
+puzzle_container = NodePath("PuzzleBackdrop")
+biome = ExtResource("2_f23e7")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(576, 326)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_qlxtp")
+
+[node name="PuzzleBackdrop" type="ColorRect" parent="."]
+color = Color(1, 1, 1, 0.752941)
+
+[node name="GridContainer" type="GridContainer" parent="PuzzleBackdrop"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 1
+offset_right = 72.0
+offset_bottom = 72.0
+columns = 3
+
+[node name="Slot" parent="PuzzleBackdrop/GridContainer" instance=ExtResource("4_urrgc")]
+visible = false
+layout_mode = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerUI" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("carrot_label", "timer_label")]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+script = ExtResource("5_wjbot")
+carrot_label = NodePath("ColorRect/CarrotLabel")
+timer_label = NodePath("ColorRect/TimerLabel")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/PlayerUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.666667)
+
+[node name="CarrotLabel" type="Label" parent="CanvasLayer/PlayerUI/ColorRect"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -30.0
+offset_right = 90.0
+offset_bottom = 30.0
+grow_vertical = 2
+text = "x Carrots"
+label_settings = SubResource("LabelSettings_ffbel")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer/PlayerUI/ColorRect"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -90.0
+offset_top = -30.0
+offset_bottom = 30.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "60 sec"
+label_settings = SubResource("LabelSettings_ffbel")
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="update_ui" from="." to="CanvasLayer/PlayerUI" method="_on_puzzle_level_update_ui"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

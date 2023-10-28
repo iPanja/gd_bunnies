@@ -26,3 +26,4 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_73i32")
 [node name="Node2D" parent="Panel" instance=ExtResource("2_4ujtp")]
 
 [connection signal="piece_dropped" from="Panel/Node2D" to="." method="_on_node_2d_piece_dropped"]
+[connection signal="swap_animation_finish" from="Panel/Node2D" to="." method="_on_node_2d_swap_animation_finish"]
