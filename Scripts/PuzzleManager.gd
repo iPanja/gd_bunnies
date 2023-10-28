@@ -6,6 +6,7 @@ extends Node2D
 
 # Calculated onready
 @onready var background = $Background
+@onready var puzzle_backdrop = $PuzzleBackdrop
 @onready var grid_container = $PuzzleBackdrop/GridContainer
 @onready var timer = $Timer
 
@@ -50,7 +51,16 @@ func _ready():
 	grid_container.set_size(Vector2(piece_size*cols, piece_size*rows))
 	grid_container.position += Vector2(padding, padding)
 	
+	# Biome asthetics
 	background.texture = biome.background
+	# Stretch background to fix screen size
+	var screen_size = get_viewport_rect().size
+	var scale_x = screen_size.x / background.texture.get_width()
+	var scale_y = screen_size.y / background.texture.get_height()
+	background.scale = Vector2(scale_x, scale_y)
+	
+	puzzle_backdrop.color = biome.board_background_color
+	
 	
 	random_board()
 	populate_board(board)
@@ -97,6 +107,7 @@ func populate_board(slot_datas: Array[SlotData]) -> void:
 		#slot.get_node("Panel/Node2D").connect("piece_dropped", _on_puzzle_piece_dropped)
 		slot.connect("on_pipe_dropped", _on_puzzle_piece_dropped)
 		slot.connect("on_swap_animation_finish", on_swap_animation_finish)
+		slot.set_panel_texture(biome.tile_background)
 		
 		if slot_data: # This should always be true -> no empty slots will exist on the board
 			slot.set_slot_data(slot_data, index)
@@ -137,8 +148,8 @@ func _on_puzzle_piece_dropped(pipe_node: Node2D, slot_data: SlotData, index: int
 	pipe_node.call("reset_to_initial_pos")
 
 func is_inside_grid_container(position: Vector2) -> bool:
-	var grid_min = grid_container.get_window().min_size
-	var grid_max = grid_container.get_window().max_size
+	var grid_min = grid_container.global_position
+	var grid_max = grid_min + grid_container.get_size()
 	
 	return (position.x >= grid_min.x && position.x <= grid_max.x) && (position.y >= grid_min.y && position.y <= grid_max.y)
 

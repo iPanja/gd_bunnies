@@ -6,8 +6,8 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_73i32"]
 texture = ExtResource("1_k17up")
-expand_margin_top = 18.0
-expand_margin_bottom = 18.0
+expand_margin_top = 13.0
+expand_margin_bottom = 13.0
 
 [node name="Slot" type="Control"]
 custom_minimum_size = Vector2(72, 72)

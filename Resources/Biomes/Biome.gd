@@ -7,5 +7,9 @@ class_name Biome
 @export var cols: int
 @export var time: int # Seconds
 @export var obstacles: bool
+
 @export var background: Texture2D
+@export var board_backrgound: Texture2D
 @export var tile_background: Texture2D
+@export var hidden_cover: Texture2D
+@export var board_background_color: Color

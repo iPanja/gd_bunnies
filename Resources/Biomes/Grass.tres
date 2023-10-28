@@ -13,3 +13,4 @@ time = 60
 obstacles = false
 background = ExtResource("1_ieppw")
 tile_background = ExtResource("3_o8qkl")
+board_background_color = Color(1, 1, 1, 1)

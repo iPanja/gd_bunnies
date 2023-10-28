@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bm7qmt3nh6tux"]
 
 [ext_resource type="Script" path="res://Scripts/PuzzleManager.gd" id="1_5uxo7"]
-[ext_resource type="Resource" uid="uid://pqwmerkx2ans" path="res://Resources/Biomes/Grass.tres" id="2_f23e7"]
+[ext_resource type="Resource" uid="uid://bgs0rdlho31yi" path="res://Resources/Biomes/Sand.tres" id="2_erbul"]
 [ext_resource type="Texture2D" uid="uid://cjhub0kjji6ru" path="res://Assets/Biomes/Grass/Background.png" id="3_qlxtp"]
 [ext_resource type="PackedScene" uid="uid://wlui8r1qvj" path="res://Scenes/Slot.tscn" id="4_urrgc"]
 [ext_resource type="Script" path="res://Scripts/UI/PlayerUI.gd" id="5_wjbot"]
@@ -15,7 +15,7 @@ font_color = Color(0, 0, 0, 1)
 [node name="PuzzleLevel" type="Node2D" node_paths=PackedStringArray("puzzle_container")]
 script = ExtResource("1_5uxo7")
 puzzle_container = NodePath("PuzzleBackdrop")
-biome = ExtResource("2_f23e7")
+biome = ExtResource("2_erbul")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(576, 326)
