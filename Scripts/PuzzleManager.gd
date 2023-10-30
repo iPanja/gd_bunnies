@@ -1,15 +1,14 @@
 extends Node2D
 
 # "Parameters"
-@export var puzzle_container: ColorRect
+@export var puzzle_container: Panel
 @export var biome: Biome
 
 # Calculated onready
 @onready var background = $Background
-@onready var puzzle_backdrop = $PuzzleBackdrop
-@onready var grid_container = $PuzzleBackdrop/GridContainer
-@onready var timer = $Timer
-
+@onready var puzzle_backdrop = %PuzzleBackdrop
+@onready var grid_container = %SlotContainer
+@onready var timer = %GameTimer
 
 @onready var rows = biome.rows
 @onready var cols = biome.cols
@@ -30,11 +29,6 @@ const padding = 24
 var isRevealed = []
 var board: Array[SlotData] = []
 
-enum layers{
-	PIECES = 0,
-	HIDDEN = 1
-}
-
 # Signals
 signal redraw
 signal update_ui(remaining_sec: int)
@@ -45,7 +39,7 @@ var anim_stack = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	puzzle_container.set_position(Vector2(375,125))
-	puzzle_container.set_size(Vector2(piece_size*cols + 2.6*padding, piece_size*rows + 2.5*padding))
+	puzzle_container.set_size(Vector2(piece_size*cols + 2*padding, piece_size*rows + 2*padding))
 	
 	grid_container.columns = cols
 	grid_container.set_size(Vector2(piece_size*cols, piece_size*rows))
@@ -59,11 +53,11 @@ func _ready():
 	var scale_y = screen_size.y / background.texture.get_height()
 	background.scale = Vector2(scale_x, scale_y)
 	
-	puzzle_backdrop.color = biome.board_background_color
-	
+	#puzzle_backdrop.color = biome.board_background_color
+	puzzle_backdrop.set_texture(biome.board_backrgound)
 	
 	random_board()
-	populate_board(board)
+	eff_populate_board(board)
 	timer.start(1)
 	
 	self.connect("redraw", _on_redraw)
@@ -92,26 +86,40 @@ func random_board():
 		board.append(slot)
 
 func _on_redraw():
-	populate_board(board)
+	eff_populate_board(board)
 
-func populate_board(slot_datas: Array[SlotData]) -> void:
-	# Destroy
-	for child in grid_container.get_children():
-		child.queue_free()
-	# Create
-	
-	var index = 0
-	for slot_data in slot_datas:
-		var slot = SlotScene.instantiate()
-		grid_container.add_child(slot)
-		#slot.get_node("Panel/Node2D").connect("piece_dropped", _on_puzzle_piece_dropped)
-		slot.connect("on_pipe_dropped", _on_puzzle_piece_dropped)
-		slot.connect("on_swap_animation_finish", on_swap_animation_finish)
-		slot.set_panel_texture(biome.tile_background)
+func eff_populate_board(slot_datas: Array[SlotData]) -> void:
+	# Efficiently udpate board by only modifying those slots that have changed
+	for index in range(grid_container.get_child_count()):
+		var previous_slot = grid_container.get_child(index)
 		
-		if slot_data: # This should always be true -> no empty slots will exist on the board
-			slot.set_slot_data(slot_data, index)
-		index += 1
+		if index >= slot_datas.size(): # Edge case
+			break
+		
+		var new_slot_data = slot_datas[index]
+		if previous_slot.slot_data != new_slot_data: # Change detected => generate entirely new Slot
+			grid_container.remove_child(previous_slot)
+			var slot = _create_new_slot(new_slot_data, index)
+			grid_container.move_child(slot, index)
+	
+	# Fill the rest of the board from slot_datas
+	# 	Upon game start, this segment will initially populate the empty board
+	for index in range(grid_container.get_child_count(), slot_datas.size()):
+		var new_slot_data = slot_datas[index]
+		_create_new_slot(new_slot_data, index)
+
+func _create_new_slot(slot_data: SlotData, index: int) -> Slot:
+	var slot = SlotScene.instantiate()
+	
+	grid_container.add_child(slot)
+	slot.connect("on_pipe_dropped", _on_puzzle_piece_dropped)
+	slot.connect("on_swap_animation_finish", on_swap_animation_finish)
+	slot.set_panel_texture(biome.tile_background)
+	
+	if slot_data: # This should always be true -> no empty slots will exist on the board
+		slot.set_slot_data(slot_data, index)
+	
+	return slot
 
 func _on_puzzle_piece_dropped(pipe_node: Node2D, slot_data: SlotData, index: int):
 	#var pipe_position = pipe_node.global_position --> use mouse_position for more smoother user experience
@@ -152,9 +160,6 @@ func is_inside_grid_container(position: Vector2) -> bool:
 	var grid_max = grid_min + grid_container.get_size()
 	
 	return (position.x >= grid_min.x && position.x <= grid_max.x) && (position.y >= grid_min.y && position.y <= grid_max.y)
-
-func start_timer():
-	pass
 
 func _on_timer_timeout(): 
 	remaining_sec -= 1

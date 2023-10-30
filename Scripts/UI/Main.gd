@@ -10,9 +10,9 @@ func _ready():
 func _process(delta):
 	pass
 
-
-func play_game():
-	get_tree().change_scene_to_file("res://Levels/puzzle_level.tscn")
-
 func quit_game():
 	get_tree().quit()
+
+
+func _on_play_button_pressed():
+	get_tree().change_scene_to_file("res://Levels/puzzle_level.tscn")

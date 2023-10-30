@@ -1,28 +1,47 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5n267lak30nm"]
+[gd_scene load_steps=6 format=3 uid="uid://b5n267lak30nm"]
 
 [ext_resource type="Script" path="res://Scripts/UI/Main.gd" id="1_2ppjq"]
 [ext_resource type="PackedScene" uid="uid://bs8wx05ismmd5" path="res://Scenes/BG.tscn" id="2_koolb"]
+[ext_resource type="Texture2D" uid="uid://dvpunbh20trlj" path="res://Assets/Buttons/Play.PNG" id="3_8a7nu"]
+[ext_resource type="Texture2D" uid="uid://cieyy4w6lvqo" path="res://Assets/Buttons/Settings.PNG" id="4_1gwnn"]
+[ext_resource type="Texture2D" uid="uid://dgldlaogc4r5b" path="res://Assets/Buttons/Collection.PNG" id="4_bohti"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_2ppjq")
 
-[node name="PlayButton" type="Button" parent="."]
-offset_left = 547.0
-offset_top = 136.0
-offset_right = 661.0
-offset_bottom = 250.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "Play"
-
-[node name="QuitButton" type="Button" parent="."]
-offset_left = 552.0
-offset_top = 344.0
-offset_right = 666.0
-offset_bottom = 458.0
-text = "Quit"
-
 [node name="ParallaxBackground" parent="." instance=ExtResource("2_koolb")]
 
-[connection signal="pressed" from="PlayButton" to="." method="play_game"]
-[connection signal="pressed" from="QuitButton" to="." method="quit_game"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -275.0
+offset_top = -215.0
+offset_right = 275.0
+offset_bottom = 215.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="PlayButton" type="TextureButton" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_8a7nu")
+stretch_mode = 3
+
+[node name="CollectionButton" type="TextureButton" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_bohti")
+stretch_mode = 3
+
+[node name="SettingsButton" type="TextureButton" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("4_1gwnn")
+stretch_mode = 3
+
+[connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]

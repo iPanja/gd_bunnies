@@ -1,4 +1,5 @@
 extends Control
+class_name Slot
 
 @export var slot_data: SlotData
 @export var index: int
