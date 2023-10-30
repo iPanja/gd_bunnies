@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bm7qmt3nh6tux"]
+[gd_scene load_steps=10 format=3 uid="uid://bm7qmt3nh6tux"]
 
 [ext_resource type="Script" path="res://Scripts/PuzzleManager.gd" id="1_5uxo7"]
 [ext_resource type="Resource" uid="uid://bgs0rdlho31yi" path="res://Resources/Biomes/Sand.tres" id="2_erbul"]
 [ext_resource type="Texture2D" uid="uid://cjhub0kjji6ru" path="res://Assets/Biomes/Grass/Background.png" id="3_qlxtp"]
-[ext_resource type="PackedScene" uid="uid://wlui8r1qvj" path="res://Scenes/Slot.tscn" id="4_urrgc"]
 [ext_resource type="Script" path="res://Scripts/UI/PlayerUI.gd" id="5_wjbot"]
 [ext_resource type="Texture2D" uid="uid://bjr26x0tgww8u" path="res://Assets/Biomes/Sand/Board_BG.PNG" id="6_70gj1"]
 [ext_resource type="Script" path="res://Scripts/UI/PuzzleBackdrop.gd" id="7_28ehg"]
@@ -21,30 +20,14 @@ expand_margin_top = 15.0
 expand_margin_right = 15.0
 expand_margin_bottom = 15.0
 
-[node name="PuzzleLevel" type="Node2D" node_paths=PackedStringArray("puzzle_container")]
+[node name="PuzzleLevel" type="Node2D"]
 script = ExtResource("1_5uxo7")
-puzzle_container = NodePath("CanvasLayer/MarginContainer/PuzzleBackdrop")
 biome = ExtResource("2_erbul")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(576, 326)
+position = Vector2(576, 324)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("3_qlxtp")
-
-[node name="PuzzleBackdrop" type="ColorRect" parent="."]
-visible = false
-color = Color(1, 1, 1, 0.752941)
-
-[node name="GridContainer" type="GridContainer" parent="PuzzleBackdrop"]
-custom_minimum_size = Vector2(72, 72)
-layout_mode = 1
-offset_right = 72.0
-offset_bottom = 72.0
-columns = 3
-
-[node name="Slot" parent="PuzzleBackdrop/GridContainer" instance=ExtResource("4_urrgc")]
-visible = false
-layout_mode = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -1,12 +1,11 @@
 extends Node2D
 
 # "Parameters"
-@export var puzzle_container: Panel
 @export var biome: Biome
 
 # Calculated onready
 @onready var background = $Background
-@onready var puzzle_backdrop = %PuzzleBackdrop
+@onready var puzzle_backdrop_panel = %PuzzleBackdrop
 @onready var grid_container = %SlotContainer
 @onready var timer = %GameTimer
 
@@ -38,9 +37,6 @@ var anim_stack = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	puzzle_container.set_position(Vector2(375,125))
-	puzzle_container.set_size(Vector2(piece_size*cols + 2*padding, piece_size*rows + 2*padding))
-	
 	grid_container.columns = cols
 	grid_container.set_size(Vector2(piece_size*cols, piece_size*rows))
 	grid_container.position += Vector2(padding, padding)
@@ -53,8 +49,8 @@ func _ready():
 	var scale_y = screen_size.y / background.texture.get_height()
 	background.scale = Vector2(scale_x, scale_y)
 	
-	#puzzle_backdrop.color = biome.board_background_color
-	puzzle_backdrop.set_texture(biome.board_backrgound)
+	#puzzle_backdrop_panel.color = biome.board_background_color
+	puzzle_backdrop_panel.set_texture(biome.board_backrgound)
 	
 	random_board()
 	eff_populate_board(board)
