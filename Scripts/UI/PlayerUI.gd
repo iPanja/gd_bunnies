@@ -1,9 +1,9 @@
 extends Control
 
-@export var carrot_label: Label
-@export var timer_label: Label
+@onready var carrot_label = $PanelContainer/MarginContainer/CarrotLabel
+@onready var fps_label = $PanelContainer/MarginContainer/FPSLabel
+@onready var timer_label = $PanelContainer/MarginContainer/TimerLabel
 
-@onready var fps_label = $ColorRect/FPSLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

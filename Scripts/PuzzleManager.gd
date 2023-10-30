@@ -4,7 +4,7 @@ extends Node2D
 @export var biome: Biome
 
 # Calculated onready
-@onready var background = $Background
+@onready var background = %Background
 @onready var puzzle_backdrop_panel = %PuzzleBackdrop
 @onready var grid_container = %SlotContainer
 @onready var timer = %GameTimer
@@ -47,7 +47,7 @@ func _ready():
 	var screen_size = get_viewport_rect().size
 	var scale_x = screen_size.x / background.texture.get_width()
 	var scale_y = screen_size.y / background.texture.get_height()
-	background.scale = Vector2(scale_x, scale_y)
+	#background.scale = Vector2(scale_x, scale_y)
 	
 	#puzzle_backdrop_panel.color = biome.board_background_color
 	puzzle_backdrop_panel.set_texture(biome.board_backrgound)
