@@ -1,0 +1,189 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmpygfyvq37qa"]
+
+[ext_resource type="Theme" uid="uid://b8qwj55ja8unv" path="res://Assets/Themes/ShopTheme.tres" id="1_7f4fn"]
+[ext_resource type="Texture2D" uid="uid://n44v8raylumw" path="res://Assets/Biomes/Sand/BG.PNG" id="1_ut77l"]
+[ext_resource type="Texture2D" uid="uid://cvufpdrtmdk7i" path="res://Assets/Bunnies/app icon.PNG" id="2_db8gl"]
+
+[node name="ShopLevel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Background" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ut77l")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_right = 50.0
+offset_bottom = 44.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Header" type="PanelContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/Header"]
+layout_mode = 2
+text = "SHOP"
+horizontal_alignment = 1
+
+[node name="ShopView" type="Control" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_7f4fn")
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -349.0
+offset_top = -1.0
+offset_right = 351.0
+offset_bottom = 499.0
+grow_horizontal = 2
+
+[node name="Skins" type="PanelContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer/Skins"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer/Skins/MarginContainer"]
+layout_mode = 2
+text = "Buy some cute animals!"
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer/Skins/MarginContainer"]
+custom_minimum_size = Vector2(120, 150)
+layout_mode = 2
+columns = 5
+
+[node name="Panel" type="Panel" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer/Skins/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(125, 150)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer/Skins/MarginContainer/GridContainer/Panel"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+offset_right = 120.0
+offset_bottom = 120.0
+texture = ExtResource("2_db8gl")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer/Skins/MarginContainer/GridContainer/Panel"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 118.0
+offset_right = 87.0
+offset_bottom = 144.0
+text = "Bunny"
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer/Skins/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(125, 150)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer/Skins/MarginContainer/GridContainer/Panel2"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+offset_right = 120.0
+offset_bottom = 120.0
+texture = ExtResource("2_db8gl")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer/Skins/MarginContainer/GridContainer/Panel2"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 118.0
+offset_right = 87.0
+offset_bottom = 144.0
+text = "Bunny"
+
+[node name="Panel3" type="Panel" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer/Skins/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(125, 150)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer/Skins/MarginContainer/GridContainer/Panel3"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+offset_right = 120.0
+offset_bottom = 120.0
+texture = ExtResource("2_db8gl")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer/Skins/MarginContainer/GridContainer/Panel3"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 118.0
+offset_right = 87.0
+offset_bottom = 144.0
+text = "Bunny"
+
+[node name="Panel4" type="Panel" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer/Skins/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(125, 150)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer/Skins/MarginContainer/GridContainer/Panel4"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+offset_right = 120.0
+offset_bottom = 120.0
+texture = ExtResource("2_db8gl")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer/Skins/MarginContainer/GridContainer/Panel4"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 118.0
+offset_right = 87.0
+offset_bottom = 144.0
+text = "Bunny"
+
+[node name="Panel5" type="Panel" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer/Skins/MarginContainer/GridContainer"]
+custom_minimum_size = Vector2(125, 150)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer/Skins/MarginContainer/GridContainer/Panel5"]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+offset_right = 120.0
+offset_bottom = 120.0
+texture = ExtResource("2_db8gl")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer/Skins/MarginContainer/GridContainer/Panel5"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 118.0
+offset_right = 87.0
+offset_bottom = 144.0
+text = "Bunny"
+
+[node name="Power Ups" type="PanelContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer/Power Ups"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/ShopView/TabContainer/Power Ups/MarginContainer"]
+layout_mode = 2
+text = "SELL ANIMALS RaWR"
