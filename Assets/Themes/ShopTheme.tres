@@ -1,7 +1,29 @@
-[gd_resource type="Theme" format=3 uid="uid://b8qwj55ja8unv"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://b8qwj55ja8unv"]
+
+[ext_resource type="StyleBox" uid="uid://tkjmnb2u2al6" path="res://Assets/Themes/SelectedTab.tres" id="1_bqwpg"]
+[ext_resource type="StyleBox" uid="uid://b5lh5ix5gsn4w" path="res://Assets/Themes/HoveredTab.tres" id="1_rqls7"]
+[ext_resource type="StyleBox" uid="uid://d3x8yqpkc8djb" path="res://Assets/Themes/Header.tres" id="1_x035b"]
+[ext_resource type="StyleBox" uid="uid://cbid66xfjfjqh" path="res://Assets/Themes/UnselectedTab.tres" id="2_10hou"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3odju"]
+bg_color = Color(0.92549, 0.788235, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [resource]
+Label/colors/font_color = Color(0.784314, 0.423529, 0.976471, 1)
 MarginContainer/constants/margin_bottom = 15
 MarginContainer/constants/margin_left = 15
 MarginContainer/constants/margin_right = 15
 MarginContainer/constants/margin_top = 15
+PanelContainer/styles/panel = ExtResource("1_x035b")
+TabBar/colors/font_selected_color = Color(0.541176, 0.0784314, 0.729412, 1)
+TabBar/font_sizes/font_size = 16
+TabContainer/colors/font_selected_color = Color(0.807843, 0.45098, 1, 1)
+TabContainer/colors/font_unselected_color = Color(0.92549, 0.788235, 1, 1)
+TabContainer/styles/panel = SubResource("StyleBoxFlat_3odju")
+TabContainer/styles/tab_hovered = ExtResource("1_rqls7")
+TabContainer/styles/tab_selected = ExtResource("1_bqwpg")
+TabContainer/styles/tab_unselected = ExtResource("2_10hou")

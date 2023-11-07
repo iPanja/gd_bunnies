@@ -20,13 +20,19 @@ const SlotStandard = preload("res://Resources/Slots/SlotStandard.tres")
 const SlotStraight = preload("res://Resources/Slots/SlotStraight.tres")
 const SlotCurved = preload("res://Resources/Slots/SlotCurved.tres")
 
+const PieceScene = preload("res://Scenes/Piece.tscn")
+const PipeStart: PipeData = preload("res://Resources/Pipes/StartPipe.tres")
+
 # Configurable
 const piece_size = 72
 const padding = 24
 
-# Configurable
+# Data
 var isRevealed = []
 var board: Array[SlotData] = []
+
+var sourcePipe: PuzzlePiece;
+var sinkPipe: PuzzlePiece;
 
 # Signals
 signal redraw
@@ -77,9 +83,20 @@ func _setRevealedArray():
 
 func random_board():
 	board = []
+	# Generate m*n board
 	for x in rows*cols:
 		var slot: SlotData = (SlotStraight if randi() % 2 == 0 else SlotCurved)
 		board.append(slot)
+		
+	# Generate source and sink
+	#sinkPipe = PieceScene.instantiate()
+	
+	sourcePipe = PieceScene.instantiate()
+	puzzle_backdrop_panel.add_child(sourcePipe)
+	sourcePipe.set_data(PipeStart)
+	sourcePipe.isDraggable = false
+	sourcePipe.position = Vector2(-72, (72+4)*2)
+
 
 func _on_redraw():
 	eff_populate_board(board)

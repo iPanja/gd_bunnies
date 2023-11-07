@@ -1,8 +1,10 @@
 extends Node2D
+class_name PuzzlePiece
 
 @onready var sprite = $Sprite2D
 @onready var timer = $Timer
 
+@export var isDraggable = true
 
 var dragging = false
 var pos_offset = Vector2.ZERO
@@ -22,9 +24,10 @@ func _process(delta):
 func _on_button_button_down():
 	initial_pos = global_position
 	# Begin drag
-	dragging = true
-	pos_offset = get_global_mouse_position() - global_position
-	set_as_top_level(true)
+	if isDraggable:
+		dragging = true
+		pos_offset = get_global_mouse_position() - global_position
+		set_as_top_level(true)
 	
 func _on_button_button_up():
 	# End drag
