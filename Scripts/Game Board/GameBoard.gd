@@ -8,6 +8,8 @@ extends GridContainer
 @onready var rows = biome.rows+2
 @onready var cols = biome.cols+2
 
+@onready var vsize = Vector2(cols*piece_size + (cols-1) * padding, rows*piece_size + (rows-1) * padding)
+
 # Data
 const SlotScene = preload("res://Scenes/BoardSlot.tscn")
 const SlotStandard = preload("res://Resources/Slots/SlotStandard.tres")
@@ -33,6 +35,9 @@ func _ready():
 	
 	board = get_random_board()
 	draw_board()
+	
+	print(vsize)
+	self.get_parent().set_size(vsize)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

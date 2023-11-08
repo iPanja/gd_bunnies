@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Resources/Biomes/Biome.gd" id="1_gpgdw"]
 [ext_resource type="Texture2D" uid="uid://n44v8raylumw" path="res://Assets/Biomes/Sand/BG.PNG" id="1_tn2pe"]
 [ext_resource type="Texture2D" uid="uid://bjr26x0tgww8u" path="res://Assets/Biomes/Sand/Board_BG.PNG" id="2_la0yb"]
-[ext_resource type="Texture2D" uid="uid://dyuncgvameaga" path="res://Assets/Biomes/Sand/Tile_BG.PNG" id="3_s7c3o"]
+[ext_resource type="Texture2D" uid="uid://dyuncgvameaga" path="res://Assets/Biomes/Sand/Tile_BG.png" id="3_s7c3o"]
 [ext_resource type="Texture2D" uid="uid://ckf1fmkdwdc0k" path="res://Assets/Biomes/Sand/Hidden_Cover.PNG" id="3_svall"]
 
 [resource]
@@ -14,7 +14,7 @@ cols = 5
 time = 60
 obstacles = false
 background = ExtResource("1_tn2pe")
-board_backrgound = ExtResource("2_la0yb")
+board_background = ExtResource("2_la0yb")
 tile_background = ExtResource("3_s7c3o")
 hidden_cover = ExtResource("3_svall")
 board_background_color = Color(0.917647, 0.560784, 0.266667, 1)

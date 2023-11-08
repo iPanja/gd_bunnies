@@ -1,17 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bm7qmt3nh6tux"]
+[gd_scene load_steps=6 format=3 uid="uid://bm7qmt3nh6tux"]
 
 [ext_resource type="Texture2D" uid="uid://n44v8raylumw" path="res://Assets/Biomes/Sand/BG.PNG" id="3_l3aun"]
 [ext_resource type="PackedScene" uid="uid://ty4u26he5age" path="res://Scenes/GameBoardScene.tscn" id="4_ikiaw"]
+[ext_resource type="Texture2D" uid="uid://dpdgws8q1s75y" path="res://Assets/Biomes/Sand/Rules.PNG" id="5_7y8vf"]
 [ext_resource type="Script" path="res://Scripts/UI/PlayerUI.gd" id="5_wjbot"]
 [ext_resource type="Texture2D" uid="uid://bjr26x0tgww8u" path="res://Assets/Biomes/Sand/Board_BG.PNG" id="6_70gj1"]
-[ext_resource type="Script" path="res://Scripts/UI/PuzzleBackdrop.gd" id="7_28ehg"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_51t1j"]
-texture = ExtResource("6_70gj1")
-expand_margin_left = 15.0
-expand_margin_top = 15.0
-expand_margin_right = 15.0
-expand_margin_bottom = 15.0
 
 [node name="PuzzleLevel" type="Node2D"]
 
@@ -36,16 +29,42 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PuzzleBackdrop" type="Panel" parent="CanvasLayer/MarginContainer"]
+[node name="Container" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+
+[node name="SideBar" type="MarginContainer" parent="CanvasLayer/MarginContainer/Container"]
+layout_mode = 2
+theme_override_constants/margin_left = 58
+theme_override_constants/margin_top = 58
+theme_override_constants/margin_right = 58
+theme_override_constants/margin_bottom = 58
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/MarginContainer/Container/SideBar"]
+layout_mode = 2
+
+[node name="RulesTexture" type="TextureRect" parent="CanvasLayer/MarginContainer/Container/SideBar/VBox"]
+layout_mode = 2
+texture = ExtResource("5_7y8vf")
+
+[node name="GameContainer" type="PanelContainer" parent="CanvasLayer/MarginContainer/Container"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Container/GameContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 58
+theme_override_constants/margin_top = 58
+theme_override_constants/margin_right = 58
+theme_override_constants/margin_bottom = 58
+
+[node name="PuzzleBackdrop" type="TextureRect" parent="CanvasLayer/MarginContainer/Container/GameContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_51t1j")
-script = ExtResource("7_28ehg")
+texture = ExtResource("6_70gj1")
+expand_mode = 2
 
-[node name="GameBoardScene" parent="CanvasLayer/MarginContainer" instance=ExtResource("4_ikiaw")]
+[node name="GameBoardScene" parent="CanvasLayer/MarginContainer/Container/GameContainer" instance=ExtResource("4_ikiaw")]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
 
 [node name="InfoBar" type="Control" parent="CanvasLayer"]
 custom_minimum_size = Vector2(0, 50)
