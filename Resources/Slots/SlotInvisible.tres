@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="SlotData" load_steps=2 format=3 uid="uid://qkl1lfps5csm"]
+
+[ext_resource type="Script" path="res://Resources/Slots/SlotData.gd" id="1_4gvbh"]
+
+[resource]
+script = ExtResource("1_4gvbh")
+is_locked = true
+type = 3
+inouts = Array[int]([])

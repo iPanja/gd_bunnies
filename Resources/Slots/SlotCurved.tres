@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="SlotData" load_steps=3 format=3 uid="uid://cne3t0yfa7hct"]
 
-[ext_resource type="Resource" uid="uid://bteg5fjse624p" path="res://Resources/Pipes/CurvedPipe.tres" id="1_syx4g"]
 [ext_resource type="Script" path="res://Resources/Slots/SlotData.gd" id="1_wsfl8"]
+[ext_resource type="Texture2D" uid="uid://3mkn4feqvuc2" path="res://Assets/Pipes/CurvedTube.png" id="2_1jy47"]
 
 [resource]
 script = ExtResource("1_wsfl8")
-pipe_data = ExtResource("1_syx4g")
 is_locked = false
+type = 1
+texture = ExtResource("2_1jy47")
+inouts = Array[int]([])

@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4mfy6k7jeqi"]
+
+[ext_resource type="Script" path="res://Scripts/Game Board/BoardSlot.gd" id="1_v1aai"]
+[ext_resource type="Resource" uid="uid://byb45y4vjma2p" path="res://Resources/Slots/SlotStraight.tres" id="2_hyb6h"]
+[ext_resource type="Texture2D" uid="uid://dyuncgvameaga" path="res://Assets/Biomes/Sand/Tile_BG.png" id="3_yx7bj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_05var"]
+texture = ExtResource("3_yx7bj")
+texture_margin_top = 18.0
+texture_margin_bottom = 18.0
+expand_margin_top = 9.0
+expand_margin_bottom = 9.0
+
+[node name="BoardSlot" type="Control"]
+custom_minimum_size = Vector2(72, 72)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1080.0
+offset_bottom = -576.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v1aai")
+slot_data = ExtResource("2_hyb6h")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_05var")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="TextureRect"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="button_down" from="TextureRect/Button" to="." method="_on_button_button_down"]
+[connection signal="button_up" from="TextureRect/Button" to="." method="_on_button_button_up"]

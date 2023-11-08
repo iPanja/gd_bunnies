@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SlotData" load_steps=3 format=3 uid="uid://c8o2mb3py0t18"]
+
+[ext_resource type="Script" path="res://Resources/Slots/SlotData.gd" id="1_ykhkc"]
+[ext_resource type="Texture2D" uid="uid://dhisnshvb7dre" path="res://Assets/Pipes/StartTube.png" id="2_03nae"]
+
+[resource]
+script = ExtResource("1_ykhkc")
+is_locked = true
+type = 4
+texture = ExtResource("2_03nae")
+inouts = Array[int]([])

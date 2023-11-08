@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://wlui8r1qvj"]
 
 [ext_resource type="Texture2D" uid="uid://brehqvp4nlk11" path="res://Assets/Biomes/Grass/TileBackground.png" id="1_k17up"]
-[ext_resource type="Script" path="res://Scripts/Slot.gd" id="1_myrbd"]
-[ext_resource type="PackedScene" uid="uid://d00memm8g1806" path="res://Scenes/Piece.tscn" id="2_4ujtp"]
+[ext_resource type="Script" path="res://Scripts/Game Board/Slot.gd" id="1_myrbd"]
+[ext_resource type="PackedScene" path="res://Scenes/Piece.tscn" id="2_4ujtp"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_73i32"]
 texture = ExtResource("1_k17up")

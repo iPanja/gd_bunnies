@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bm7qmt3nh6tux"]
+[gd_scene load_steps=8 format=3 uid="uid://bm7qmt3nh6tux"]
 
+[ext_resource type="Script" path="res://Scripts/PuzzleManager.gd" id="1_5uxo7"]
+[ext_resource type="Resource" uid="uid://bgs0rdlho31yi" path="res://Resources/Biomes/Sand.tres" id="2_erbul"]
 [ext_resource type="Texture2D" uid="uid://n44v8raylumw" path="res://Assets/Biomes/Sand/BG.PNG" id="3_l3aun"]
-[ext_resource type="PackedScene" uid="uid://ty4u26he5age" path="res://Scenes/GameBoardScene.tscn" id="4_ikiaw"]
 [ext_resource type="Script" path="res://Scripts/UI/PlayerUI.gd" id="5_wjbot"]
 [ext_resource type="Texture2D" uid="uid://bjr26x0tgww8u" path="res://Assets/Biomes/Sand/Board_BG.PNG" id="6_70gj1"]
 [ext_resource type="Script" path="res://Scripts/UI/PuzzleBackdrop.gd" id="7_28ehg"]
@@ -14,6 +15,8 @@ expand_margin_right = 15.0
 expand_margin_bottom = 15.0
 
 [node name="PuzzleLevel" type="Node2D"]
+script = ExtResource("1_5uxo7")
+biome = ExtResource("2_erbul")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -42,10 +45,9 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_51t1j")
 script = ExtResource("7_28ehg")
 
-[node name="GameBoardScene" parent="CanvasLayer/MarginContainer" instance=ExtResource("4_ikiaw")]
+[node name="SlotContainer" type="GridContainer" parent="CanvasLayer/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
 
 [node name="InfoBar" type="Control" parent="CanvasLayer"]
 custom_minimum_size = Vector2(0, 50)
@@ -88,4 +90,5 @@ text = "x Sec"
 [node name="GameTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 
+[connection signal="update_ui" from="." to="CanvasLayer/InfoBar" method="_on_puzzle_level_update_ui"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_timer_timeout"]
