@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvqnpky6q0ep1"]
+
+[ext_resource type="Script" path="res://Scripts/Game Board/BankManager.gd" id="1_1yryw"]
+[ext_resource type="Resource" uid="uid://byam5hd0s5bgy" path="res://Resources/Slots/SlotStandard.tres" id="2_lmovx"]
+
+[node name="BankScene" type="GridContainer"]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1080.0
+offset_bottom = -576.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1yryw")
+slot_data = ExtResource("2_lmovx")

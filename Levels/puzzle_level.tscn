@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bm7qmt3nh6tux"]
+[gd_scene load_steps=7 format=3 uid="uid://bm7qmt3nh6tux"]
 
+[ext_resource type="PackedScene" uid="uid://cvqnpky6q0ep1" path="res://Scenes/BankScene.tscn" id="3_8ckw5"]
 [ext_resource type="Texture2D" uid="uid://n44v8raylumw" path="res://Assets/Biomes/Sand/BG.PNG" id="3_l3aun"]
 [ext_resource type="PackedScene" uid="uid://ty4u26he5age" path="res://Scenes/GameBoardScene.tscn" id="4_ikiaw"]
 [ext_resource type="Texture2D" uid="uid://dpdgws8q1s75y" path="res://Assets/Biomes/Sand/Rules.PNG" id="5_7y8vf"]
@@ -31,9 +32,13 @@ grow_vertical = 2
 
 [node name="Container" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="SideBar" type="MarginContainer" parent="CanvasLayer/MarginContainer/Container"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_constants/margin_left = 58
 theme_override_constants/margin_top = 58
 theme_override_constants/margin_right = 58
@@ -43,21 +48,37 @@ theme_override_constants/margin_bottom = 58
 layout_mode = 2
 
 [node name="RulesTexture" type="TextureRect" parent="CanvasLayer/MarginContainer/Container/SideBar/VBox"]
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 texture = ExtResource("5_7y8vf")
+expand_mode = 3
+
+[node name="Bank" type="PanelContainer" parent="CanvasLayer/MarginContainer/Container/SideBar/VBox"]
+self_modulate = Color(1, 1, 1, 0.490196)
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="BankScene" parent="CanvasLayer/MarginContainer/Container/SideBar/VBox/Bank" node_paths=PackedStringArray("main_board_pc") instance=ExtResource("3_8ckw5")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+main_board_pc = NodePath("../../../../GameContainer/GameBoardScene")
 
 [node name="GameContainer" type="PanelContainer" parent="CanvasLayer/MarginContainer/Container"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+size_flags_stretch_ratio = 2.0
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MarginContainer/Container/GameContainer"]
+[node name="BackdropMC" type="MarginContainer" parent="CanvasLayer/MarginContainer/Container/GameContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 58
 theme_override_constants/margin_top = 58
 theme_override_constants/margin_right = 58
 theme_override_constants/margin_bottom = 58
 
-[node name="PuzzleBackdrop" type="TextureRect" parent="CanvasLayer/MarginContainer/Container/GameContainer/MarginContainer"]
+[node name="PuzzleBackdrop" type="TextureRect" parent="CanvasLayer/MarginContainer/Container/GameContainer/BackdropMC"]
 unique_name_in_owner = true
 layout_mode = 2
 texture = ExtResource("6_70gj1")

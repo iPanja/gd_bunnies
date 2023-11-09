@@ -1,4 +1,5 @@
-extends GridContainer
+extends PieceManager
+class_name GameBoard
 
 # Preferences/Parameters
 @export var biome: Biome
@@ -11,17 +12,8 @@ extends GridContainer
 @onready var vsize = Vector2(cols*piece_size + (cols-1) * padding, rows*piece_size + (rows-1) * padding)
 
 # Data
-const SlotScene = preload("res://Scenes/BoardSlot.tscn")
-const SlotStandard = preload("res://Resources/Slots/SlotStandard.tres")
-const SlotStraight = preload("res://Resources/Slots/SlotStraight.tres")
-const SlotCurved = preload("res://Resources/Slots/SlotCurved.tres")
-const SlotInvisible = preload("res://Resources/Slots/SlotInvisible.tres")
-const SlotSource = preload("res://Resources/Slots/SlotSource.tres")
-
-# Data
 var is_revealed = []
 var board: Array[SlotData] = []
-var anim_stack = []
 
 # Signals - potential ideas
 signal on_board_update(board: Array[SlotData])
@@ -132,25 +124,45 @@ func _on_puzzle_piece_dropped(slot: BoardSlot):
 				var dest_node = self.get_child(target_index)
 				
 				dest_node.play_swap_animation(source_node.global_position)
-				anim_stack.append([source_index, source, target_index, target])
+				#anim_stack.append([source_index, source, target_index, target])
+				anim_stack.append([source_index, target, target_index, source])
 				
 				# Snap piece that was moved, temporarily (until redraw after animation finishes)
 				source_node.snap(dest_node.get_pipe_global_pos())
 				
 				return
+	
 	# Move piece back
-	#pipe_node.call("reset_pos")
 	pipe_node.reset_pos()
 
-func is_inside_grid_container(position: Vector2) -> bool:
-	var grid_min = self.global_position
-	var grid_max = grid_min + self.get_size()
-	
-	return (position.x >= grid_min.x && position.x <= grid_max.x) && (position.y >= grid_min.y && position.y <= grid_max.y)
+# Save piece to slot
+func move_index(index: int, destination: PieceManager):
+	pass
 
-func on_swap_animation_finish():
-	var data = anim_stack.pop_front()
-	if data.size() > 3:
-		board[data[0]] = data[3]
-		board[data[2]] = data[1]
-		draw_board()
+func overwrite_index(slot_data: SlotData, index: int):
+	pass
+	
+func get_slot(index: int):
+	return board[index]
+
+func set_slot(index: int, slot_data: SlotData):
+	board[index] = slot_data
+
+func set_slot_by_offset(offset: Vector2, slot_data: SlotData):
+	set_slot(get_index_by_offset(offset), slot_data)
+
+func get_index_by_offset(offset: Vector2):
+	var row = int(offset.y / piece_size)
+	var col = int(offset.x / piece_size)
+	return row*cols + col
+
+func snap_board_slot(board_slot: BoardSlot, offset: Vector2):
+	var index = get_index_by_offset(offset)
+	board_slot.snap(get_child(index).global_position)
+
+#func on_swap_animation_finish():
+#	var data = anim_stack.pop_front()
+#	if data.size() > 3:
+#		board[data[0]] = data[3]
+#		board[data[2]] = data[1]
+#		draw_board()
