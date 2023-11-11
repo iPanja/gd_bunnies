@@ -65,12 +65,11 @@ func play_swap_animation(global_destination: Vector2):
 	if tween:
 		tween.kill()
 	
-	texture_rect.set_as_top_level(true)
-	texture_rect.global_position = global_position
+	resurface()
 	
 	tween = create_tween()
-	tween.tween_property(texture_rect, "global_position", global_destination, 0.25)
 	tween.connect("finished", on_tween_finish)
+	tween.tween_property(texture_rect, "global_position", global_destination, 0.25)
 
 func on_tween_finish():
 	emit_signal("swap_animation_finish")
@@ -91,3 +90,11 @@ func get_pipe_pos() -> Vector2:
 
 func get_pipe_global_pos() -> Vector2:
 	return texture_rect.global_position
+
+func resurface():
+	texture_rect.set_as_top_level(true)
+	texture_rect.global_position = global_position
+
+func desurface():
+	texture_rect.set_as_top_level(false);
+	texture_rect.position = Vector2.ZERO

@@ -10,24 +10,17 @@ const SlotSource = preload("res://Resources/Slots/SlotSource.tres")
 
 var anim_stack = []
 
-# Piece has been dragged to this index
-# Step 1
-	# add to board/snap
-func move_from_index(index: int, destination: PieceManager):
-	pass
+var id: int = -1
+@onready var pm_manager: PMManager = get_node("/root/PmManager")
 
-# Piece here will animate then snap to target PieceManager
-# Step 2
-	# Animate
-		# on_animation_finish => add to target board
-func move_to_index(slot_data: SlotData, index: int):
-	pass
+func _ready():
+	id = pm_manager.register(self)
 
 func get_slot(index: int):
 	pass
 
 func set_slot(index: int, slot_data: SlotData):
-	pass
+	fix_slot(index)
 
 func set_slot_by_offset(offset: Vector2, slot_data: SlotData):
 	pass
@@ -36,7 +29,9 @@ func get_index_by_offset(offset: Vector2):
 	pass
 
 func snap_board_slot(board_slot: BoardSlot, offset: Vector2):
-	pass
+	var index = get_index_by_offset(offset)
+	board_slot.snap(get_child(index).global_position)
+
 
 func animate_slot(dest_global_position: Vector2, index: int):
 	var slot_data = get_slot(index)
@@ -48,7 +43,7 @@ func _create_new_slot(slot_data: SlotData, index: int) -> BoardSlot:
 	add_child(slot)
 	slot.connect("piece_swap", _on_puzzle_piece_dropped)
 	slot.connect("swap_animation_finish", on_swap_animation_finish)
-	#slot.set_panel_texture(biome.tile_background)
+	slot.set_panel_texture(pm_manager.biome.tile_background)
 	
 	return slot
 
@@ -56,9 +51,44 @@ func draw_board():
 	pass
 
 # When a piece on this board has been dragged & dropped
+# When the piece originally in this bank gets dragged & dropped into the main board
 func _on_puzzle_piece_dropped(slot: BoardSlot):
-	pass
+	var mouse_position = get_global_mouse_position()
+	#var board_slot = get_child() as BoardSlot
+	var board_slot = slot
 	
+	var dest_board = get_board_collision(mouse_position)
+	if dest_board:
+		var offset = mouse_position - dest_board.global_position
+		var dest_index = dest_board.get_index_by_offset(offset)
+		
+		var source_slot = get_slot(slot.index)
+		var dest_slot = dest_board.get_slot(dest_index)
+		
+		if source_slot.is_draggable() && dest_slot.is_draggable():
+			# Snap piece
+			dest_board.snap_board_slot(board_slot, offset)
+			# Animate other piece
+			dest_board.animate_slot(board_slot.global_position, dest_index)
+			# After animation => update each board
+			
+			if self.id != dest_board.id:
+				anim_stack.append([slot.index, dest_slot])
+				dest_board.anim_stack.append([dest_index, get_slot(slot.index), self])
+			else:
+				anim_stack.append([slot.index, dest_slot, dest_index, get_slot(slot.index)])
+			
+			return
+	
+	board_slot.reset_pos()
+	
+func get_board_collision(global_pos: Vector2):
+	return pm_manager.get_collision_pm(global_pos)
+	
+func fix_slot(index: int):
+	var previous_slot = get_child(index)
+	previous_slot.desurface()
+
 # When a piece coming to this board finishes that animation
 # 	=> add piece to board
 func on_swap_animation_finish():

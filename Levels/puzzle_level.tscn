@@ -58,11 +58,10 @@ self_modulate = Color(1, 1, 1, 0.490196)
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 
-[node name="BankScene" parent="CanvasLayer/MarginContainer/Container/SideBar/VBox/Bank" node_paths=PackedStringArray("main_board_pc") instance=ExtResource("3_8ckw5")]
+[node name="BankScene" parent="CanvasLayer/MarginContainer/Container/SideBar/VBox/Bank" instance=ExtResource("3_8ckw5")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-main_board_pc = NodePath("../../../../GameContainer/GameBoardScene")
 
 [node name="GameContainer" type="PanelContainer" parent="CanvasLayer/MarginContainer/Container"]
 self_modulate = Color(1, 1, 1, 0)

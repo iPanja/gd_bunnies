@@ -23,6 +23,7 @@ signal on_board_update(board: Array[SlotData])
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	super()
 	self.columns = cols
 	
 	board = get_random_board()
@@ -67,10 +68,10 @@ func get_random_board() -> Array[SlotData]:
 func draw_board() -> void:
 	# Efficiently update board by only modifying those slots that have changed
 	for index in range(get_child_count()):
-		var previous_slot = get_child(index)
-		
 		if index >= board.size(): # Edge case
 			break
+		
+		var previous_slot = get_child(index)
 		
 		var new_slot_data = board[index]
 		if previous_slot.slot_data != new_slot_data: # Change detected => generate entirely new Slot
@@ -84,69 +85,15 @@ func draw_board() -> void:
 		var new_slot_data = board[index]
 		_create_new_slot(new_slot_data, index)
 
-func _create_new_slot(slot_data: SlotData, index: int) -> BoardSlot:
-	var slot = SlotScene.instantiate()
-	slot.propogate(slot_data, index)
-	add_child(slot)
-	slot.connect("piece_swap", _on_puzzle_piece_dropped)
-	slot.connect("swap_animation_finish", on_swap_animation_finish)
-	slot.set_panel_texture(biome.tile_background)
-	
-	return slot
-
 #
 #	[PIECES]
 #
-
-func _on_puzzle_piece_dropped(slot: BoardSlot):
-	var pipe_node = slot
-	var slot_data = pipe_node.slot_data
-	var index = pipe_node.index
-	
-	var dropped_position = get_global_mouse_position()
-	if is_inside_grid_container(dropped_position):
-		# Detect collision with another slot
-		var offset = dropped_position - self.global_position
-		var row = int(offset.y / piece_size)
-		var col = int(offset.x / piece_size)
-		
-		var source_index = index
-		var target_index = row*cols + col
-		
-		if board[source_index].is_draggable() && board[target_index].is_draggable():
-			if target_index >= 0 and target_index < board.size() and source_index != target_index:
-				# Swap pieces
-				var source: SlotData = slot_data.duplicate()
-				var target: SlotData = board[target_index].duplicate()
-				
-				# Animation
-				var source_node = self.get_child(source_index)
-				var dest_node = self.get_child(target_index)
-				
-				dest_node.play_swap_animation(source_node.global_position)
-				#anim_stack.append([source_index, source, target_index, target])
-				anim_stack.append([source_index, target, target_index, source])
-				
-				# Snap piece that was moved, temporarily (until redraw after animation finishes)
-				source_node.snap(dest_node.get_pipe_global_pos())
-				
-				return
-	
-	# Move piece back
-	pipe_node.reset_pos()
-
-# Save piece to slot
-func move_index(index: int, destination: PieceManager):
-	pass
-
-func overwrite_index(slot_data: SlotData, index: int):
-	pass
-	
 func get_slot(index: int):
 	return board[index]
 
 func set_slot(index: int, slot_data: SlotData):
 	board[index] = slot_data
+	super(index, slot_data)
 
 func set_slot_by_offset(offset: Vector2, slot_data: SlotData):
 	set_slot(get_index_by_offset(offset), slot_data)
@@ -155,14 +102,3 @@ func get_index_by_offset(offset: Vector2):
 	var row = int(offset.y / piece_size)
 	var col = int(offset.x / piece_size)
 	return row*cols + col
-
-func snap_board_slot(board_slot: BoardSlot, offset: Vector2):
-	var index = get_index_by_offset(offset)
-	board_slot.snap(get_child(index).global_position)
-
-#func on_swap_animation_finish():
-#	var data = anim_stack.pop_front()
-#	if data.size() > 3:
-#		board[data[0]] = data[3]
-#		board[data[2]] = data[1]
-#		draw_board()
