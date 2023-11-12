@@ -8,4 +8,4 @@ script = ExtResource("1_pfkbi")
 is_locked = false
 type = 0
 texture = ExtResource("2_kdej4")
-inouts = Array[int]([])
+inouts = Array[int]([1, 3])

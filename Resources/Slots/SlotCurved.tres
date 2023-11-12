@@ -8,4 +8,4 @@ script = ExtResource("1_wsfl8")
 is_locked = false
 type = 1
 texture = ExtResource("2_1jy47")
-inouts = Array[int]([])
+inouts = Array[int]([0, 1])

@@ -7,7 +7,7 @@ class_name BoardSlot
 @export var slot_data: SlotData
 @export var index: int
 
-@onready var is_draggable = slot_data.is_draggable()
+@export var is_locked = false
 
 var is_dragging = false
 var pos_offset = Vector2.ZERO
@@ -16,6 +16,9 @@ var tween: Tween = null
 
 signal piece_swap(piece)
 signal swap_animation_finish(piece)
+signal water_animation_finish(piece)
+
+var TestBunnyTexture = preload("res://Assets/Bunnies/SmallBunny.png")
 
 #
 func _ready():
@@ -33,15 +36,20 @@ func propogate(slot_data: SlotData, index: int):
 	
 	if is_inside_tree():
 		_ready()
-
 #
 #	[DRAGGING]
 #
 
+func is_draggable() -> bool:
+	return slot_data.is_draggable() && !is_locked
+
+func lock():
+	is_locked = true
+
 # Begin drag
 func _on_button_button_down():
 	initial_pos = global_position
-	if is_draggable:
+	if is_draggable():
 		is_dragging = true
 		pos_offset = get_global_mouse_position() - global_position
 		texture_rect.set_as_top_level(true)
@@ -70,6 +78,13 @@ func play_swap_animation(global_destination: Vector2):
 	tween = create_tween()
 	tween.connect("finished", on_tween_finish)
 	tween.tween_property(texture_rect, "global_position", global_destination, 0.25)
+
+func play_water_animation():
+	# play animation...
+	await get_tree().create_timer(1).timeout
+	
+	texture_rect.texture = TestBunnyTexture
+	emit_signal("water_animation_finish", self)
 
 func on_tween_finish():
 	emit_signal("swap_animation_finish")

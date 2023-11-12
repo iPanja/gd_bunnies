@@ -43,6 +43,7 @@ func _create_new_slot(slot_data: SlotData, index: int) -> BoardSlot:
 	add_child(slot)
 	slot.connect("piece_swap", _on_puzzle_piece_dropped)
 	slot.connect("swap_animation_finish", on_swap_animation_finish)
+	slot.connect("water_animation_finish", on_water_animation_finish)
 	slot.set_panel_texture(pm_manager.biome.tile_background)
 	
 	return slot
@@ -54,7 +55,6 @@ func draw_board():
 # When the piece originally in this bank gets dragged & dropped into the main board
 func _on_puzzle_piece_dropped(slot: BoardSlot):
 	var mouse_position = get_global_mouse_position()
-	#var board_slot = get_child() as BoardSlot
 	var board_slot = slot
 	
 	var dest_board = get_board_collision(mouse_position)
@@ -65,7 +65,7 @@ func _on_puzzle_piece_dropped(slot: BoardSlot):
 		var source_slot = get_slot(slot.index)
 		var dest_slot = dest_board.get_slot(dest_index)
 		
-		if source_slot.is_draggable() && dest_slot.is_draggable():
+		if board_slot.is_draggable() && dest_board.get_child(dest_index).is_draggable():
 			# Snap piece
 			dest_board.snap_board_slot(board_slot, offset)
 			# Animate other piece
@@ -107,6 +107,9 @@ func on_swap_animation_finish():
 				set_slot(data[2], data[3])
 	
 	draw_board()
+
+func on_water_animation_finish(slot: BoardSlot):
+	pass
 
 func is_inside_grid_container(position: Vector2) -> bool:
 	var grid_min = self.global_position

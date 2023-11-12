@@ -15,10 +15,6 @@ func draw_board() -> void:
 		remove_child(previous_slot)
 		var slot = _create_new_slot(slot_data, 0)
 
-#func clear_bank() -> void:
-#	slot_data = SlotInvisible
-#	draw_board()
-
 func get_slot(index: int):
 	return slot_data
 
