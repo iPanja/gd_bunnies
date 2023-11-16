@@ -1,3 +1,3 @@
 extends Node
 
-var playerData: PlayerData = PlayerData.new()
+# var pause_menu: PackedScene = preload("");

@@ -1,13 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://bm7qmt3nh6tux"]
+[gd_scene load_steps=10 format=3 uid="uid://bm7qmt3nh6tux"]
 
+[ext_resource type="Script" path="res://Scripts/PuzzleLevel.gd" id="1_mkiuv"]
 [ext_resource type="PackedScene" uid="uid://cvqnpky6q0ep1" path="res://Scenes/BankScene.tscn" id="3_8ckw5"]
 [ext_resource type="Texture2D" uid="uid://n44v8raylumw" path="res://Assets/Biomes/Sand/BG.PNG" id="3_l3aun"]
+[ext_resource type="Texture2D" uid="uid://dyuncgvameaga" path="res://Assets/Biomes/Sand/Tile_BG.png" id="3_q1543"]
 [ext_resource type="PackedScene" uid="uid://ty4u26he5age" path="res://Scenes/GameBoardScene.tscn" id="4_ikiaw"]
 [ext_resource type="Texture2D" uid="uid://dpdgws8q1s75y" path="res://Assets/Biomes/Sand/Rules.PNG" id="5_7y8vf"]
 [ext_resource type="Script" path="res://Scripts/UI/PlayerUI.gd" id="5_wjbot"]
 [ext_resource type="Texture2D" uid="uid://bjr26x0tgww8u" path="res://Assets/Biomes/Sand/Board_BG.PNG" id="6_70gj1"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a3h6i"]
+texture = ExtResource("3_q1543")
+texture_margin_top = 9.0
+texture_margin_bottom = 10.0
+
 [node name="PuzzleLevel" type="Node2D"]
+script = ExtResource("1_mkiuv")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -54,9 +62,9 @@ texture = ExtResource("5_7y8vf")
 expand_mode = 3
 
 [node name="Bank" type="PanelContainer" parent="CanvasLayer/MarginContainer/Container/SideBar/VBox"]
-self_modulate = Color(1, 1, 1, 0.490196)
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_a3h6i")
 
 [node name="BankScene" parent="CanvasLayer/MarginContainer/Container/SideBar/VBox/Bank" instance=ExtResource("3_8ckw5")]
 layout_mode = 2
