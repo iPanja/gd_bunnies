@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bm7qmt3nh6tux"]
+[gd_scene load_steps=11 format=3 uid="uid://bm7qmt3nh6tux"]
 
 [ext_resource type="Script" path="res://Scripts/PuzzleLevel.gd" id="1_mkiuv"]
 [ext_resource type="PackedScene" uid="uid://cvqnpky6q0ep1" path="res://Scenes/BankScene.tscn" id="3_8ckw5"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dpdgws8q1s75y" path="res://Assets/Biomes/Sand/Rules.PNG" id="5_7y8vf"]
 [ext_resource type="Script" path="res://Scripts/UI/PlayerUI.gd" id="5_wjbot"]
 [ext_resource type="Texture2D" uid="uid://bjr26x0tgww8u" path="res://Assets/Biomes/Sand/Board_BG.PNG" id="6_70gj1"]
+[ext_resource type="Texture2D" uid="uid://dekpqb2sg51t8" path="res://Assets/Bunnies/SmallBunny.png" id="9_nvvfk"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a3h6i"]
 texture = ExtResource("3_q1543")
@@ -131,6 +132,18 @@ text = "x FPS"
 layout_mode = 2
 size_flags_horizontal = 8
 text = "x Sec"
+
+[node name="SettingsButton" type="TextureButton" parent="CanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -61.0
+offset_bottom = 61.0
+grow_horizontal = 0
+texture_normal = ExtResource("9_nvvfk")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="GameTimer" type="Timer" parent="."]
 unique_name_in_owner = true

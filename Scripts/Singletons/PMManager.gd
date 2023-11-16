@@ -6,9 +6,12 @@ var biome: Biome = preload("res://Resources/Biomes/Sand.tres")
 
 func get_collision_pm(global_mouse_pos: Vector2) -> PieceManager:
 	for pm in pms:
-		if pm.is_inside_grid_container(global_mouse_pos):
-			# Collision with this pm
-			return pm
+		if is_instance_valid(pm):
+			if pm.is_inside_grid_container(global_mouse_pos):
+				# Collision with this pm
+				return pm
+		else:
+			pms.erase(pm)
 	return null
 
 func register(pm: PieceManager) -> int:
