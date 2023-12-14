@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bm7qmt3nh6tux"]
+[gd_scene load_steps=14 format=3 uid="uid://bm7qmt3nh6tux"]
 
 [ext_resource type="Script" path="res://Scripts/PuzzleLevel.gd" id="1_mkiuv"]
 [ext_resource type="PackedScene" uid="uid://cvqnpky6q0ep1" path="res://Scenes/BankScene.tscn" id="3_8ckw5"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dekpqb2sg51t8" path="res://Assets/Bunnies/SmallBunny.png" id="9_nvvfk"]
 [ext_resource type="AudioStream" uid="uid://62wt3b3umcb8" path="res://Assets/Audio/GameLevelMusic.wav" id="10_g0mvc"]
 [ext_resource type="Script" path="res://Scripts/AudioLooper.gd" id="11_y8eug"]
+[ext_resource type="AudioStream" uid="uid://dw7dd76ridg6k" path="res://Assets/Audio/swoosh.wav" id="12_e8fqe"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a3h6i"]
 texture = ExtResource("3_q1543")
@@ -152,6 +153,12 @@ process_mode = 3
 stream = ExtResource("10_g0mvc")
 bus = &"Music"
 script = ExtResource("11_y8eug")
+
+[node name="SwooshPlayer" type="AudioStreamPlayer" parent="CanvasLayer"]
+unique_name_in_owner = true
+process_mode = 3
+stream = ExtResource("12_e8fqe")
+bus = &"SFX"
 
 [node name="GameTimer" type="Timer" parent="."]
 unique_name_in_owner = true

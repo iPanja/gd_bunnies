@@ -8,6 +8,8 @@ const SlotStraight = preload("res://Resources/Slots/SlotStraight.tres")
 const SlotCurved = preload("res://Resources/Slots/SlotCurved.tres")
 const SlotSource = preload("res://Resources/Slots/SlotSource.tres")
 
+signal on_piece_swap_sfx
+
 var anim_stack = []
 
 var id: int = -1
@@ -66,6 +68,8 @@ func _on_puzzle_piece_dropped(slot: BoardSlot):
 		var dest_slot = dest_board.get_slot(dest_index)
 		
 		if board_slot.is_draggable() && dest_board.get_child(dest_index).is_draggable():
+			# Play SFX sound
+			on_piece_swap_sfx.emit()
 			# Snap piece
 			dest_board.snap_board_slot(board_slot, offset)
 			# Animate other piece
