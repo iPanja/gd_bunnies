@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://b5n267lak30nm"]
+[gd_scene load_steps=8 format=3 uid="uid://b5n267lak30nm"]
 
 [ext_resource type="Script" path="res://Scripts/UI/Main.gd" id="1_2ppjq"]
 [ext_resource type="PackedScene" uid="uid://bs8wx05ismmd5" path="res://Scenes/BG.tscn" id="2_koolb"]
 [ext_resource type="Texture2D" uid="uid://dvpunbh20trlj" path="res://Assets/Buttons/Play.PNG" id="3_8a7nu"]
 [ext_resource type="Texture2D" uid="uid://cieyy4w6lvqo" path="res://Assets/Buttons/Settings.PNG" id="4_1gwnn"]
 [ext_resource type="Texture2D" uid="uid://dgldlaogc4r5b" path="res://Assets/Buttons/Collection.PNG" id="4_bohti"]
+[ext_resource type="AudioStream" uid="uid://62wt3b3umcb8" path="res://Assets/Audio/GameLevelMusic.wav" id="6_iplnb"]
+[ext_resource type="Script" path="res://Scripts/AudioLooper.gd" id="7_rq1u0"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_2ppjq")
@@ -43,5 +45,10 @@ stretch_mode = 3
 layout_mode = 2
 texture_normal = ExtResource("4_1gwnn")
 stretch_mode = 3
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="CanvasLayer"]
+stream = ExtResource("6_iplnb")
+bus = &"Music"
+script = ExtResource("7_rq1u0")
 
 [connection signal="pressed" from="CanvasLayer/MarginContainer/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]

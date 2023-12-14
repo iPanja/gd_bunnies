@@ -4,7 +4,6 @@ var SETTINGS_FILE_PATH = "user://settings.tres"
 
 @export var settings = ResourceLoader.load("res://Resources/Settings/Settings.tres")
 
-
 func _ready():
 	load_settings_file()
 	set_audio_bus_toggle("Music", settings.music_toggle)
@@ -21,7 +20,7 @@ func write_settings():
 # Interact with Audio Bus
 func set_audio_bus_toggle(bus_name: String, toggle: bool):
 	var bus_index = AudioServer.get_bus_index(bus_name)
-	AudioServer.set_bus_mute(bus_index, toggle)
+	AudioServer.set_bus_mute(bus_index, !toggle)
 	write_back_volume_setting(bus_name, toggle)
 
 func write_back_volume_setting(bus_name: String, toggle: bool):

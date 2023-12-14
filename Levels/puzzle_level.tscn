@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bm7qmt3nh6tux"]
+[gd_scene load_steps=13 format=3 uid="uid://bm7qmt3nh6tux"]
 
 [ext_resource type="Script" path="res://Scripts/PuzzleLevel.gd" id="1_mkiuv"]
 [ext_resource type="PackedScene" uid="uid://cvqnpky6q0ep1" path="res://Scenes/BankScene.tscn" id="3_8ckw5"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://Scripts/UI/PlayerUI.gd" id="5_wjbot"]
 [ext_resource type="Texture2D" uid="uid://bjr26x0tgww8u" path="res://Assets/Biomes/Sand/Board_BG.PNG" id="6_70gj1"]
 [ext_resource type="Texture2D" uid="uid://dekpqb2sg51t8" path="res://Assets/Bunnies/SmallBunny.png" id="9_nvvfk"]
+[ext_resource type="AudioStream" uid="uid://62wt3b3umcb8" path="res://Assets/Audio/GameLevelMusic.wav" id="10_g0mvc"]
+[ext_resource type="Script" path="res://Scripts/AudioLooper.gd" id="11_y8eug"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a3h6i"]
 texture = ExtResource("3_q1543")
@@ -144,6 +146,12 @@ grow_horizontal = 0
 texture_normal = ExtResource("9_nvvfk")
 ignore_texture_size = true
 stretch_mode = 0
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="CanvasLayer"]
+process_mode = 3
+stream = ExtResource("10_g0mvc")
+bus = &"Music"
+script = ExtResource("11_y8eug")
 
 [node name="GameTimer" type="Timer" parent="."]
 unique_name_in_owner = true
