@@ -14,14 +14,13 @@ func _ready():
 	back_button.pressed.connect(on_back_pressed)
 	sfx_toggle.toggled.connect(on_option_toggle.bind("SFX"))
 	music_toggle.toggled.connect(on_option_toggle.bind("Music"))
-
-#func on_audio_slider_changed(value: float, bus_name: String):
-#	set_bus_volume_percent(bus_name, value)
+	
+	# Load current state from settings
+	sfx_toggle.button_pressed = GameSettings.settings.sfx_toggle
+	music_toggle.button_pressed = GameSettings.settings.music_toggle
 
 func on_option_toggle(value: bool, bus_name: String):
-	print(bus_name)
-	print(value)
-	set_bus_volume_toggle(bus_name, value)
+	GameSettings.set_audio_bus_toggle(bus_name, value)
 
 func on_back_pressed():
 	back_pressed.emit()

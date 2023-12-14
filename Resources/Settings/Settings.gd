@@ -1,12 +1,12 @@
 extends Resource
 class_name Settings
 
-@export var sfx_volume: float = 1.0
-@export var music_volume: float = 1.0
+@export var music_toggle: bool = true
+@export var sfx_toggle: bool = true
 
-func set_bus_volume_percent(bus_name: String, percent: float):
+func set_bus_toggle(bus_name: String, toggle: bool):
 	match bus_name:
 		"Music":
-			music_volume = percent
+			music_toggle = toggle
 		"SFX":
-			sfx_volume = percent
+			sfx_toggle = toggle
