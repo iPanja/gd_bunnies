@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Bunny" load_steps=2 format=3 uid="uid://djj110b0v5t4r"]
+
+[ext_resource type="Script" path="res://Resources/Bunnies/Bunny.gd" id="1_2qrpj"]
+
+[resource]
+script = ExtResource("1_2qrpj")
+id = 0
+cost = 5
+isSoldInShop = true

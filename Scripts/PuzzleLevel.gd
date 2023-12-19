@@ -6,12 +6,12 @@ extends Node2D
 @onready var game_board_scene = $CanvasLayer/MarginContainer/Container/GameContainer/GameBoardScene
 @onready var bank_scene = $CanvasLayer/MarginContainer/Container/SideBar/VBox/Bank/BankScene
 
-
 var pause_menu: PackedScene = preload("res://Scenes/PauseMenu.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	settings_button.pressed.connect(on_settings_pressed)
+	# Hookup audio signals
 	game_board_scene.get_child(0).on_piece_swap_sfx.connect(on_piece_swap)
 	bank_scene.on_piece_swap_sfx.connect(on_piece_swap)
 

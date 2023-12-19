@@ -14,3 +14,5 @@ class_name Biome
 @export var hidden_cover: Texture2D
 @export var board_background_color: Color
 @export var rules_texture: Texture2D
+
+# @export biome_reward: Bunny
