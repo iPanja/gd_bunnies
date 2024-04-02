@@ -130,7 +130,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 [issues-shield]: https://img.shields.io/github/issues/iPanja/gd_bunnies.svg?style=for-the-badge
 [issues-url]: https://github.com/iPanja/gd_bunnies/issues
 [license-shield]: https://img.shields.io/github/license/iPanja/gd_bunnies.svg?style=for-the-badge
-[license-url]: https://github.com/iPanja/gd_bunnies/blob/master/LICENSE.txt
+[license-url]: https://github.com/iPanja/gd_bunnies/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/fletcher-henneman/
 [product-screenshot]: product_screenshots.gif
